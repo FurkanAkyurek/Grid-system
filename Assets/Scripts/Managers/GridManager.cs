@@ -1,8 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public delegate void OnMatchCountChanged(); // bu fonksiyonun imzasına parametre de tanımlayabilirsin
+    public static event OnMatchCountChanged onMatchCountChanged; // event'in içerisinde add remove oluşturabiliyorsun.
+
     [SerializeField] private Transform cellsParent;
 
     [SerializeField] private GameObject cellPrefab;
@@ -25,6 +28,8 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         BuildGrid();
+
+        onMatchCountChanged?.Invoke();
     }
 
     #region Grid System
@@ -124,7 +129,9 @@ public class GridManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("MatchCount", PlayerPrefs.GetInt("MatchCount") + 1);
 
-            UIManager.Instance.OnMatchCountChanged?.Invoke();
+            onMatchCountChanged?.Invoke();
+
+            //UIManager.Instance.OnMatchCountChanged?.Invoke();
 
             foreach (var item in connectedCells)
             {

@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using System;
 
 public class UIManager : MonoBehaviour
 {
-    public Action OnMatchCountChanged;
+    //public Action OnMatchCountChanged;
 
     public Action<int> OnRebuildButtonClicked;
 
@@ -18,18 +18,18 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
 
-        OnMatchCountChanged += SetMatchCountText;
+        //OnMatchCountChanged += SetMatchCountText;
     }
 
     private void Start()
     {
-        SetMatchCountText();
+        //SetMatchCountText();
     }
 
-    private void SetMatchCountText()
+    /*public void SetMatchCountText()
     {
         matchCountText.text = "Match Count : " + PlayerPrefs.GetInt("MatchCount").ToString();
-    }
+    }*/
 
     public void RebuildButton()
     {
